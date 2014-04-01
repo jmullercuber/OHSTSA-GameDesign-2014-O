@@ -1,0 +1,242 @@
+.noSelect {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.vertFlip { /*CSS3!*/
+	transform: scale(1,-1);
+	-ms-transform: scale(1,-1); /* IE 9 */
+	-webkit-transform: scale(1,-1); /* Safari and Chrome */
+}
+
+body {
+	background-color: #ddccee;
+	margin: 0px;
+	font-family: "Trebuchet MS";
+}
+
+h1 {
+	display: inline-block;
+	width: 100px;
+	margin-bottom: 15px;
+	border-bottom-right-radius: 20px;
+	padding-top: 5px;
+	padding-bottom: 10px;
+	color: #ffeedd;
+	background-color: #cc88cc;
+	text-align: center;
+}
+
+
+#intro {
+	display: inline-block;
+	width: 50%;
+	margin: auto;
+	margin-bottom: 7px;
+	border-radius: 10px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	background-color: #00FF7F;
+	text-align: center;
+}
+
+.button {
+	display: block;
+	width: 100px;
+	margin: auto;
+	margin-bottom: 10px;
+	border: 1px solid black;
+	border-radius: 6px;
+	padding: 3px;
+	background-color: #f0f0e0;
+	cursor: pointer;
+	text-align: center;
+}
+
+#centerOnPage {
+	width: 90%;
+	margin: auto;
+}
+
+canvas {
+	display: block;
+	width: 1000px;
+	height: 500px;
+	margin: auto;
+	border: 1px solid black;
+	background-color: white;
+}
+
+img {
+	display: none;
+}
+
+#flipScreenButton {
+	display: inline-block;
+	float: right;
+	width: 20px;
+	margin-right: 20px;
+	border: 2px solid #333333;
+	border-radius: 12px;
+	cursor: pointer;
+	text-align: center;
+}
+
+#restartLevelButton {
+	display: inline-block;
+	float: right;
+	width: 20px;
+	margin-right: 20px;
+	border: 2px solid #333333;
+	border-radius: 12px;
+	cursor: pointer;
+	text-align: center;
+}
+
+#fullscreenButton {
+	display: inline-block;
+	float: right;
+	width: 20px;
+	border: 2px solid #333333;
+	border-radius: 6px;
+	cursor: pointer;
+	text-align: center;
+}
+
+ul {
+	display: inline-block;
+	width: 205px;
+}
+
+#showDebug {
+	display: block;
+	width: 150px;
+	margin: 5px;
+	margin-top: 20px;
+	margin-bottom: 0px;
+	border-radius: 0px;
+	border-top-right-radius: 6px;
+}
+
+#debugging {
+	display: none;
+	border: 2px dashed black;
+	margin: 5px;
+	margin-top: 0px;
+	padding: 3px;
+	background-color: #ddccaa;
+}
+
+textarea {
+	display: block;
+	resize: none;
+	background-color: #222222;
+	color: #cccccc;
+	font-family: monospace;
+}
+
+#showResult {
+	display: block;
+	height: 20px;
+	padding: 2px;
+	padding-left: 8px;
+	background-color: #aa9999;
+}
+
+#status {
+	height: 25px;
+	width: 986px;
+	margin: auto;
+	margin-top: 3px;
+	border: 2px solid #333333;
+	border-radius: 5px;
+	padding: 5px;
+	background-color: #aaaaaa;
+}
+
+span {
+	display: inline-block;
+	position: relative;
+	top: -5px;
+}
+
+#statsHead {
+	width: 100px;
+}
+
+#levelStat {
+	width: 150px;
+}
+
+#timeStat {
+	width: 150px;
+}
+
+#healthHolder {
+	display: inline-block;
+	height: 20px;
+	width: 120px;
+	border: 2px solid #111111;
+	border-radius: 10px;
+	background: white;
+	overflow: hidden; 
+}
+
+#health {
+	height: 20px;
+	width: 120px;
+	background: #dd1133;
+}
+
+#inveDiv {
+	height: 55px;
+	width: 550px;
+	margin: auto;
+	margin-top: 3px;
+	border: 2px solid #333333;
+	border-radius: 5px;
+	padding: 5px;
+	background-color: #aaaaaa;
+}
+
+#inventoryHead {
+	display: inline-block;
+	position: relative;
+	top: -17.5px;
+	
+	height: 20px;
+	width: 75px;
+	margin-right: 20px;
+	margin-top: 10px;
+	border: 2px solid #111111;
+	border-radius: 3px;
+	padding: 3px;
+	background: #aaaaaa;
+}
+
+#inventory {
+	display: inline-block;
+	height: 35px;
+	width: 400px;
+	margin-top: 3px;
+	border: 2px solid #111111;
+	border-radius: 5px;
+	padding: 5px;
+	background: #bdbbff;
+}
+
+#inventory > img {
+	display: inline-block;
+	height: 31px;
+	margin: 2px;
+	margin-left: 5px;
+	margin-right: 3px;
+}
+
+.inlineB {
+	display: inline-block
+}

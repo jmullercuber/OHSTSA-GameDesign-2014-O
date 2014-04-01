@@ -1,16 +1,82 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+	<head>
+		<meta charset="UTF-8">
+		<title>O</title>
+		<link rel="stylesheet" type="text/css" href="styles/style.css">
+	</head>
+	
+	<body>
+		<div id="intro">Note: You may have to click on the window to begin playing</div>
+		
+		<img id="backgroundPic" src="images/background.png"></img>
+		<img id="jimmyPic" src="images/simpleCharacter.png"></img>
+		<img id="charWalkRight" src="images/charFacingRight.png"></img>
+		<img id="charFlyRight" src="images/charJumpingRight.png"></img>
+		<img id="blockPic" src="images/block.png"></img>
+		<img id="transwallPic" src="images/transitionwall.png"></img>
+		<img id="dangerblockPic" src="images/dangerblock.png"></img>
+		<img id="portalPic" src="images/portal.png"></img>
+		<img id="lavaSpikePic" src="images/Skipe.png"></img>
+		<img id="spitterPic" src="images/Spitter.png"></img>
+		<img id="spitFirePic" src="images/Spit Fire.png"></img>
+		<img id="spring" src="images/Spring.png"></img>
+		<img id="blueKey" src="images/blueKey.png"></img>
+		<img id="blueButtonUp" src="images/blueButton_up.png"></img>
+		<img id="blueButtonDown" src="images/blueButton_down.png"></img>
+		<img id="2Boss" src="images/Mad Boss.png"></img>
+		
+		<audio src="sounds/The Manifesto.mp3" autoplay loop></audio>
+		
+		<div id="zone" class="noSelect">
+			<canvas id="gameArea" width="1000" height="500"></canvas>
+			<div id="status">
+				<span id="statsHead" class="inlineB">Status</span>
+				<span id="levelStat">Level: 0</span>
+				<span id="timeStat">Time: 0</span>
+				<span class="inlineB">Health</span>
+				<div id="healthHolder">
+					<div id="health"></div>
+				</div>
+				<div id="fullscreenButton">+</div>
+				<div id="restartLevelButton">R</div>
+				<div id="flipScreenButton">F</div>
+			</div>
+			<div id="inveDiv">
+				<span id="inventoryHead" class="inlineB">Inventory:</span>
+				<canvas id=inventory width=550 heigth=55></canvas>
+			</div>
+		</div>
+		
+		
+		
+		<div id="showDebug" class="button">Debugging Pad</div>
+		<div id="debugging">
+			<ul>
+				<li id="showCoords">Mouse Position: (?, ?)</li>
+				<li id="FPS">FPS=0</li>
+				<li id="position">Position: (0,0)</li>
+				<li id="velocityX">VelocityX=0</li>
+				<li id="velocityY">VelocityY=0</li>
+				<li id="canJump">CanJump: true, true</li>
+			</ul>
+			
+			<div id="programmersArea" class="inlineB">
+				<textarea id="enterCodeHere" rows="6" cols="80"></textarea>
+				<div id="showResult">Start coding to get stuff!</div>
+			</div>
+			<div class="inlineB">
+				<div onclick="document.getElementById('showResult').innerHTML = eval(document.getElementById('enterCodeHere').value);" class="button">Evaluate</div>
+				<div onclick="document.getElementById('enterCodeHere').value=''" class="button">Clear</div>
+			</div>
+		</div>
+		
+		<script language="javascript" type="text/javascript" src="scripts/script1.js"></script>
+		<script language="javascript" type="text/javascript" src="scripts/classes.js"></script>
+		<script language="javascript" type="text/javascript" src="scripts/levels.js"></script>
+		<script language="javascript" type="text/javascript" src="scripts/draw.js"></script>
+		<script language="javascript" type="text/javascript" src="scripts/interface.js"></script>
+		<script language="javascript" type="text/javascript" src="scripts/math.js"></script>
+		<script language="javascript" type="text/javascript" src="scripts/events.js"></script>
+		<script language="javascript" type="text/javascript" src="scripts/script2.js"></script>
+	</body
