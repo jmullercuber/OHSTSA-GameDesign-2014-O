@@ -210,6 +210,7 @@ function wall(x, y, dx, dy) {
 	};
 	this.mu = -0.3;   // I don't think the actual greek letter would be valid
 	this.bouncieness = 0;
+	this.color = "#666666";
 	this.image = {
 		invert: document.getElementById("blockPic"),
 		mario: document.getElementById("blockPic")
@@ -320,6 +321,7 @@ function transitionwall(x, y, dx, dy, n) {
 	};
 	this.mu = 0;
 	this.bouncieness = 0;
+	this.color = "BLANK";
 	this.image = {
 		invert: document.getElementById("transwallPic"),
 		mario: document.getElementById("transwallPic")
@@ -341,6 +343,7 @@ function dangerblock(x, y, dx, dy) {
 	};
 	this.mu = 0;
 	this.bouncieness = 0;
+	this.color = "#660000";
 	this.image = {
 		invert: document.getElementById("dangerblockPic"),
 		mario: document.getElementById("dangerblockPic")
@@ -364,6 +367,7 @@ function movingBlock(x, y, dx, dy, f, g) {
 	this.acceleration = new Vector(0, 0);
 	this.mu = 0;
 	this.bouncieness = 0;
+	this.color = "#666666";
 	this.image = {
 		invert: document.getElementById("blockPic"),
 		mario: document.getElementById("blockPic")

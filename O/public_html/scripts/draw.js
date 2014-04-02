@@ -24,9 +24,21 @@ function drawScene() {
 	// draw blocks
     for (var i=0; i<blocksList.length; i++) {
         var block = blocksList[i];
+		if (block === world) { continue; }
 		// If you are is the scene...
         if (isCollision(world, block)) {
-            gameArea.drawImage(block.image[mode], block.where.corner.x, block.where.corner.y, block.where.change.x, block.where.change.y);
+			// If we don't have to paint an image...
+			if (block.color) {
+				// then don't, draw a rectangle
+				var oldStyle = gameArea.fillStyle;
+				gameArea.fillStyle = block.color;
+				gameArea.fillRect(block.where.corner.x, block.where.corner.y, block.where.change.x, block.where.change.y);
+				gameArea.fillStyle = oldStyle;
+			}
+			else {
+				//alert("Drawing from image");
+	            gameArea.drawImage(block.image[mode], block.where.corner.x, block.where.corner.y, block.where.change.x, block.where.change.y);
+			}
         }
     }
 	
@@ -73,7 +85,18 @@ function drawStatic() {
     for (var i=0; i<staticBlocksList.length; i++) {
         var block = staticBlocksList[i];
         if (isCollision(world, block)) {
-            staticArea.drawImage(block.image[mode], block.where.corner.x, block.where.corner.y, block.where.change.x, block.where.change.y);
+			// If we don't have to paint an image...
+			if (block.color) {
+				// then don't, draw a rectangle
+				var oldStyle = staticArea.fillStyle;
+				staticArea.fillStyle = block.color;
+				staticArea.fillRect(block.where.corner.x, block.where.corner.y, block.where.change.x, block.where.change.y);
+				staticArea.fillStyle = oldStyle;
+			}
+			else {
+				//alert("Drawing from image");
+	            staticArea.drawImage(block.image[mode], block.where.corner.x, block.where.corner.y, block.where.change.x, block.where.change.y);
+			}
         }
     }
 	

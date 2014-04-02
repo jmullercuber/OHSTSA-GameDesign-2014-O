@@ -19,7 +19,7 @@ function changeLevel(cl, cq, f) {
     staticArea.setTransform(1, 0, 0, 1, 0, 0);
     staticArea.translate(staticArea.canvas.width/2, staticArea.canvas.height/2);
     staticArea.scale(1, -1);
-    currentLevel = (cl || currentLevel);
+    currentLevel = (arguments.length > 0 ? cl:currentLevel);
     currentQuadrant = (cq || 1);
     world = new WORLD();
     switch (currentLevel) {
@@ -599,7 +599,14 @@ function changeLevel(cl, cq, f) {
 					new dangerblock(2700, -50, 500, 15);// more lava on the floor
 					new wall(2990, 260, 90, 50);		// stepping stone on ceiling 2
 					new dangerblock(2900, 290, 90, 20);	// static lava, in place of lava animated
-					var al = new dangerblock(2920, 280, 60, 30);// animated lava
+					var al = new movingBlock(2920, 280, 60, 30);// animated lava
+						al.color = "#660000";
+						al.collide = function(who) {	// copy n pasted from dangerblock
+							if (who==jimmy)
+							{
+								jimmy.health-=2;
+							}
+						};
 						al.do = function(t) {
 							t/=10;
 							this.acceleration = new Vector(0, 0);
