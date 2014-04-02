@@ -413,5 +413,4 @@ function text(v, x, y, s, f) {
 	this.bouncieness = 0;
 	this.font = (s?s:18) + "pt " + (f?f:"Trebuchet MS");
 	textList.push(this);
-	drawStatic();
 }

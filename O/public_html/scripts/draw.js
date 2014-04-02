@@ -12,10 +12,10 @@ var frameTime = 0, lastLoop = new Date(), thisLoop;
 function drawScene() {
 	
 	// if this is a new scene
-	//if (time<1) {
+	if (time<1) {
 		// then draw on the static canvas too
 		drawStatic();
-	//}
+	}
 	
     // clear the canvas
     gameArea.clearRect(world.where.corner.x, world.where.corner.y, world.where.change.x, world.where.change.y);
