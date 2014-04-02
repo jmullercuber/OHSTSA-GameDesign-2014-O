@@ -69,6 +69,15 @@ function drawStatic() {
     staticArea.scale(1, -1);
 	
 	
+	// draw static blocks
+    for (var i=0; i<staticBlocksList.length; i++) {
+        var block = staticBlocksList[i];
+        if (isCollision(world, block)) {
+            staticArea.drawImage(block.image[mode], block.where.corner.x, block.where.corner.y, block.where.change.x, block.where.change.y);
+        }
+    }
+	
+	
 	//draw text
     for (var k=0; k<textList.length; k++) {
         var str = textList[k];
@@ -77,15 +86,6 @@ function drawStatic() {
             staticArea.scale(1, -1);
             staticArea.fillText(str.value, str.where.corner.x, -str.where.corner.y);
             staticArea.scale(1, -1);
-        }
-    }
-	
-	
-	// draw static blocks
-    for (var i=0; i<staticBlocksList.length; i++) {
-        var block = staticBlocksList[i];
-        if (isCollision(world, block)) {
-            staticArea.drawImage(block.image[mode], block.where.corner.x, block.where.corner.y, block.where.change.x, block.where.change.y);
         }
     }
 }
