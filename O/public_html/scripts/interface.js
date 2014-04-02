@@ -38,7 +38,7 @@ document.getElementById("pauseButton").onclick = function(e) {
 };
 
 function drawUserInterface() {
-	document.getElementById("health").style.width = document.getElementById("healthHolder").offsetWidth * jimmy.health/100;
+	document.getElementById("health").style.width = (document.getElementById("healthHolder").offsetWidth * jimmy.health/100) + "px";
 	document.getElementById("levelStat").innerHTML = "Level: " + currentLevel + " - " + currentQuadrant;
 	document.getElementById("timeStat").innerHTML = "Time: " + (time/55).toFixed(0);
 }
