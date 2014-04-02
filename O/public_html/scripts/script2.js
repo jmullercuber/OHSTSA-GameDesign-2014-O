@@ -1,3 +1,9 @@
+var requestAnimationFrame = 
+	window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+	window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+
+var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
+
 var time = 0;
 changeLevel();
 var update = function() {
@@ -6,6 +12,8 @@ var update = function() {
     drawScene();
     drawUserInterface();
     time++;
+	intervalID = requestAnimationFrame(update);
 };
 
-intervalID = setInterval(update, 1000/60);
+intervalID = requestAnimationFrame(update);
+//intervalID = setInterval(update, 1000/60);

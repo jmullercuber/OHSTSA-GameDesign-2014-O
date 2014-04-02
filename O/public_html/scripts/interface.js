@@ -28,11 +28,11 @@ document.getElementById("pauseButton").onclick = function(e) {
     // If it's off, turn it on.
     // I manually set it to -1 below
     if (intervalID == -1) {
-        intervalID = setInterval(update, 1000/60);
+        intervalID = requestAnimationFrame(update);
     }
     // Otherwise, it must be on and we want it stopped.
     else {
-        clearInterval(intervalID);
+        cancelAnimationFrame(intervalID);
         intervalID = -1;
     }
 };
