@@ -8,4 +8,4 @@ var update = function() {
     time++;
 };
 
-setInterval(update, 1000/60);
+intervalID = setInterval(update, 1000/60);

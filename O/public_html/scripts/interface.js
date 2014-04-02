@@ -1,3 +1,5 @@
+var intervalID;
+
 document.getElementById("flipScreenButton").onclick = function(e) {
 	canvas.className = (canvas.className=="vertFlip")?"":"vertFlip";
 };
@@ -19,6 +21,19 @@ document.getElementById("fullscreenButton").onclick = function(e) {
     else if (document.mozFullScreenElement && document.exitFullscreen) {
 		document.exitFullscreen();
 		document.getElementById("fullscreenButton").innerHTML = "+";
+    }
+};
+
+document.getElementById("pauseButton").onclick = function(e) {
+    // If it's off, turn it on.
+    // I manually set it to -1 below
+    if (intervalID == -1) {
+        intervalID = setInterval(update, 1000/60);
+    }
+    // Otherwise, it must be on and we want it stopped.
+    else {
+        clearInterval(intervalID);
+        intervalID = -1;
     }
 };
 
