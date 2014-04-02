@@ -7,11 +7,11 @@ var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimat
 var time = 0;
 changeLevel();
 var update = function() {
-    handleInput();
-    reacts();
-    drawScene();
-    drawUserInterface();
-    time++;
+	handleInput();
+	reacts();
+	drawScene();
+	drawUserInterface();
+	time++;
 	intervalID = requestAnimationFrame(update);
 };
 

@@ -17,24 +17,24 @@ document.getElementById("fullscreenButton").onclick = function(e) {
 	if (document.mozFullScreenElement === null && gzone.requestFullscreen) {
 		gzone.requestFullscreen();
 		document.getElementById("fullscreenButton").innerHTML = "-";
-    }
-    else if (document.mozFullScreenElement && document.exitFullscreen) {
+	}
+	else if (document.mozFullScreenElement && document.exitFullscreen) {
 		document.exitFullscreen();
 		document.getElementById("fullscreenButton").innerHTML = "+";
-    }
+	}
 };
 
 document.getElementById("pauseButton").onclick = function(e) {
-    // If it's off, turn it on.
-    // I manually set it to -1 below
-    if (intervalID == -1) {
-        intervalID = requestAnimationFrame(update);
-    }
-    // Otherwise, it must be on and we want it stopped.
-    else {
-        cancelAnimationFrame(intervalID);
-        intervalID = -1;
-    }
+	// If it's off, turn it on.
+	// I manually set it to -1 below
+	if (intervalID == -1) {
+		intervalID = requestAnimationFrame(update);
+	}
+	// Otherwise, it must be on and we want it stopped.
+	else {
+		cancelAnimationFrame(intervalID);
+		intervalID = -1;
+	}
 };
 
 function drawUserInterface() {

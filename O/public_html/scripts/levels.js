@@ -8,21 +8,21 @@ function changeLevel(cl, cq, f) {
 	//}
 	//document.getElementById("inventory").innerHTML = "";
 	time = 0;
-    charList = [];
+	charList = [];
 	staticBlocksList = [];
-    blocksList = [];
-    textList = [];
+	blocksList = [];
+	textList = [];
 	// or ... .setTransform(1, 0, 0, -1, 500, 250);
-    gameArea.setTransform(1, 0, 0, 1, 0, 0);
-    gameArea.translate(gameArea.canvas.width/2, gameArea.canvas.height/2);
-    gameArea.scale(1, -1);
-    staticArea.setTransform(1, 0, 0, 1, 0, 0);
-    staticArea.translate(staticArea.canvas.width/2, staticArea.canvas.height/2);
-    staticArea.scale(1, -1);
-    currentLevel = (arguments.length > 0 ? cl:currentLevel);
-    currentQuadrant = (cq || 1);
-    world = new WORLD();
-    switch (currentLevel) {
+	gameArea.setTransform(1, 0, 0, 1, 0, 0);
+	gameArea.translate(gameArea.canvas.width/2, gameArea.canvas.height/2);
+	gameArea.scale(1, -1);
+	staticArea.setTransform(1, 0, 0, 1, 0, 0);
+	staticArea.translate(staticArea.canvas.width/2, staticArea.canvas.height/2);
+	staticArea.scale(1, -1);
+	currentLevel = (arguments.length > 0 ? cl:currentLevel);
+	currentQuadrant = (cq || 1);
+	world = new WORLD();
+	switch (currentLevel) {
 		case 0:		// pre game
 			switch (currentQuadrant) {
 				case 1:	// home screen
@@ -173,59 +173,59 @@ function changeLevel(cl, cq, f) {
 					break;
 			}
 			break;
-        case 1:	// level1
+		case 1:	// level1
 			switch (currentQuadrant) {
 				case 1:	// level1.1
-                    mode = "mario";
-                    world.size.where.change.x = 1100;
-                    jimmy = new character(-450, -150, document.getElementById("charWalkRight"), document.getElementById("charFlyRight"));
-                        jimmy.orientation = 1;
-                    for (var i=1; i<=4; i++) {
-                        new wall (-450+i*70, -225, 65, i*60);
-                    }
+					mode = "mario";
+					world.size.where.change.x = 1100;
+					jimmy = new character(-450, -150, document.getElementById("charWalkRight"), document.getElementById("charFlyRight"));
+						jimmy.orientation = 1;
+					for (var i=1; i<=4; i++) {
+						new wall (-450+i*70, -225, 65, i*60);
+					}
 					new wall (-100, -225, 65, 400);
 					new dangerblock(-490, 240, 300, 10);
-                    for (i=1; i<=4; i++) {
-                        new wall (-10+i*70, 250-i*60, 65, i*60);
-                    }
-                    new wall (340, -150, 65, 400);
+					for (i=1; i<=4; i++) {
+						new wall (-10+i*70, 250-i*60, 65, i*60);
+					}
+					new wall (340, -150, 65, 400);
 					new dangerblock(-25, -225, 275, 10);
-                    new wall(-500, 251, 1500, 25);  // ceiling
-                    new wall(-500, -250, 1500, 25);  // ground
-                    new wall(-525, -250, 25, 500);  // left wall // positioned to be hidden
-                    new transitionwall(500, -225, 25, 450); // continue to quad2
-                    break;
-                case 2: //level 1.2
+					new wall(-500, 251, 1500, 25);  // ceiling
+					new wall(-500, -250, 1500, 25);  // ground
+					new wall(-525, -250, 25, 500);  // left wall // positioned to be hidden
+					new transitionwall(500, -225, 25, 450); // continue to quad2
+					break;
+				case 2: //level 1.2
 					mode = "mario";
-                    world.size.where.change.x = 1250;
-                    //world.size.where.change.y = 1500;
-                    jimmy = new character(-450, -150, document.getElementById("charWalkRight"), document.getElementById("charFlyRight"));
-                        jimmy.orientation = 1;
-                    for (var i=1; i<=4; i++) {
-                        new wall (-450+i*70, -225, 71, i*50);
-                    }
-                    new text("Some Blocks Move...", -420, 85, 24);
+					world.size.where.change.x = 1250;
+					//world.size.where.change.y = 1500;
+					jimmy = new character(-450, -150, document.getElementById("charWalkRight"), document.getElementById("charFlyRight"));
+						jimmy.orientation = 1;
+					for (var i=1; i<=4; i++) {
+						new wall (-450+i*70, -225, 71, i*50);
+					}
+					new text("Some Blocks Move...", -420, 85, 24);
 					new dangerblock(-490, 240, 800, 10);	
-                    new dangerblock(400, 100, 25, 150);	// slot left
-                    new dangerblock(500, 100, 25, 150);	// slot right
+					new dangerblock(400, 100, 25, 150);	// slot left
+					new dangerblock(500, 100, 25, 150);	// slot right
 					new dangerblock(-25, -225, 275, 10);
-                    new wall(-500, 251, 1500, 25);  // ceiling
-                    new wall(-500, -250, 1500, 25);  // ground
-                    new wall(-525, -250, 25, 500);  // left wall // positioned to be hidden
-                    new wall(725, -250, 25, 500);  // right wall
-                    new movingBlock(-100, -160, 75, 10,	// upwards, then sideways
+					new wall(-500, 251, 1500, 25);  // ceiling
+					new wall(-500, -250, 1500, 25);  // ground
+					new wall(-525, -250, 25, 500);  // left wall // positioned to be hidden
+					new wall(725, -250, 25, 500);  // right wall
+					new movingBlock(-100, -160, 75, 10,	// upwards, then sideways
 						function(t){
 							this.acceleration.x = (t==350)?5:0;
 							this.acceleration.y = (t==300)?2:(t==350)?-2:0;
 						}
 					);
-                    new movingBlock(-124, 219, 75, 10,	// upwards, then sideways
+					new movingBlock(-124, 219, 75, 10,	// upwards, then sideways
 						function(t){
 							this.acceleration.x = (t==350)?5:0;
 						}
 					);
-                    new wall(500, -50, 25, 75);	// blocking you to move
-                    new movingBlock(425, -225, 75, 10,	// upwards
+					new wall(500, -50, 25, 75);	// blocking you to move
+					new movingBlock(425, -225, 75, 10,	// upwards
 						function(t){
 							this.acceleration.y = (t==550)?5:0;
 							if (t==650) {
@@ -235,21 +235,21 @@ function changeLevel(cl, cq, f) {
 							}
 						}
 					);
-                    new transitionwall(425, 225, 75, 25, 3); //move ssideways
-                    new wall(375, 150, 25, 100);	// blocking you to move
-                    
-                    break;
+					new transitionwall(425, 225, 75, 25, 3); //move ssideways
+					new wall(375, 150, 25, 100);	// blocking you to move
+					
+					break;
 				case 3: //level1.3
-                    mode = "mario";
-                    world.size.where.change.x = 1100;
-                    jimmy = new character(-450, -130, document.getElementById("charWalkRight"), document.getElementById("charFlyRight"));
-                        jimmy.orientation = 1;
-                    new dangerblock(-500, 230, 1100, 200);	
-                    new dangerblock(-1000, -300, 2000, 50);	
+					mode = "mario";
+					world.size.where.change.x = 1100;
+					jimmy = new character(-450, -130, document.getElementById("charWalkRight"), document.getElementById("charFlyRight"));
+						jimmy.orientation = 1;
+					new dangerblock(-500, 230, 1100, 200);	
+					new dangerblock(-1000, -300, 2000, 50);	
 					new wall(-500, 251, 1500, 25);  // ceiling
-                    new wall(-500, -250, 1500, 25);  // ground
-                    new wall(-550, -250, 50, 500);	// left wall
-                    new wall(600, -250, 50, 500);	// right wall
+					new wall(-500, -250, 1500, 25);  // ground
+					new wall(-550, -250, 50, 500);	// left wall
+					new wall(600, -250, 50, 500);	// right wall
 					
 					// The first moving layer goes slowly
 					var width;
@@ -303,9 +303,9 @@ function changeLevel(cl, cq, f) {
 			}
 			break;
 		
-        case 2:	// Level2	// Jorge's
-            switch (currentQuadrant) {
-                case 1:	// Level2.1
+		case 2:	// Level2	// Jorge's
+			switch (currentQuadrant) {
+				case 1:	// Level2.1
 					mode = "mario";
 					world.size.where.corner = new Vector(0, -550);
 					world.size.where.change = new Vector(3000, 1750);
@@ -507,11 +507,11 @@ function changeLevel(cl, cq, f) {
 					new dangerblock(900, world.size.where.corner.y, 400, 400);		// Hidding second spike
 					new wall(1300, world.size.where.corner.y, 700, 800);		// Third stepping block
 					new portal(1500, -200, 100, 100, 3);	//transitionwall
-            }
-            break;
-        case 3:	// Level3	// Kehmoni
-            switch (currentQuadrant) {
-                case 1://3.1
+			}
+			break;
+		case 3:	// Level3	// Kehmoni
+			switch (currentQuadrant) {
+				case 1://3.1
 					mode = "mario";
 					world.size.where.corner.x = 0;
 					world.size.where.corner.y=-1000;
@@ -562,7 +562,7 @@ function changeLevel(cl, cq, f) {
 					new portal(630, -50, 100, 100, 4);
 					
 					break;
-                case 2://3.2
+				case 2://3.2
 					mode = "mario";
 					world.size.where.corner.x = 0;
 					world.size.where.change = new Vector(5000, 800);
@@ -571,11 +571,11 @@ function changeLevel(cl, cq, f) {
 					new wall(0, -100, 135, 75);   //starting platform
 					new portal(225, -200, 100, 100, 4);   // small portal swasck
 					break;
-            }
-            break;
-        case 4://Bossification
-            switch (currentQuadrant) {
-                case 1:
+			}
+			break;
+		case 4://Bossification
+			switch (currentQuadrant) {
+				case 1:
 					mode = "mario";
 					world.size.where.corner.x = 0;
 					world.size.where.change = new Vector(5000, 750);
@@ -748,7 +748,7 @@ function changeLevel(cl, cq, f) {
 										{
 											jimmy.health-=2;
 										}
-        
+		
 									}
 								);
 							}
@@ -772,7 +772,7 @@ function changeLevel(cl, cq, f) {
 										{
 											jimmy.health-=2;
 										}
-        
+		
 									}
 								);
 							}
@@ -791,9 +791,9 @@ function changeLevel(cl, cq, f) {
 					new wall(-350, -100, 50, 100);
 					new portal(700, 2800, 100, 100, 5);
 					break;
-            }
-            break;
-        case 5:	// Level5
+			}
+			break;
+		case 5:	// Level5
 			// and this is the final (boss)
 			mode = "mario";
 			world.size.where.corner = new Vector(-500, -375);
@@ -845,7 +845,7 @@ function changeLevel(cl, cq, f) {
 			break;
 //		default:
 //			changeLevel(0, 1);
-    }
-    
-    if (f) {f();}
+	}
+	
+	if (f) {f();}
 }
