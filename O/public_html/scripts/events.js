@@ -6,7 +6,7 @@ document.getElementById("showDebug").onclick = function() {
 };
 
 document.onmousemove = function(e) {
-        var rect = canvas.getBoundingClientRect();
+        var rect = canvasHolder.getBoundingClientRect();
         var mouseCoor = {
             x: e.clientX - rect.left,
             y: e.clientY - rect.top
@@ -29,7 +29,7 @@ document.onkeydown = document.onkeyup = function(e) {
 	}
 	
 	if (e.type == "keydown" && keys[70]) {  // Bind f to Flipping the screen
-		canvas.className = (canvas.className=="vertFlip")?"":"vertFlip";
+		canvasHolder.className = (canvasHolder.className=="vertFlip")?"":"vertFlip";
 	}
 //	if (e.type == "keydown" && keys[27]) {	// Pressing escape makes fullscreen button correct
 //		document.getElementById("fullscreenButton").innerHTML = "+";

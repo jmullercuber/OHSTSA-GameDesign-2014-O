@@ -9,11 +9,16 @@ function changeLevel(cl, cq, f) {
 	//document.getElementById("inventory").innerHTML = "";
 	time = 0;
     charList = [];
+	staticBlocksList = [];
     blocksList = [];
     textList = [];
+	// or ... .setTransform(1, 0, 0, -1, 500, 250);
     gameArea.setTransform(1, 0, 0, 1, 0, 0);
-    gameArea.translate(canvas.width/2, canvas.height/2);
+    gameArea.translate(gameArea.canvas.width/2, gameArea.canvas.height/2);
     gameArea.scale(1, -1);
+    staticArea.setTransform(1, 0, 0, 1, 0, 0);
+    staticArea.translate(staticArea.canvas.width/2, staticArea.canvas.height/2);
+    staticArea.scale(1, -1);
     currentLevel = (cl || currentLevel);
     currentQuadrant = (cq || 1);
     world = new WORLD();

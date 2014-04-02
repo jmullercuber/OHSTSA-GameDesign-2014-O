@@ -2,6 +2,7 @@ var mode = "mario";
 var currentLevel = 0;
 var currentQuadrant = 1;
 var charList = [];
+var staticBlocksList = [];
 var blocksList = [];
 var textList = [];
 var jimmy;
@@ -216,18 +217,18 @@ function wall(x, y, dx, dy) {
 	this.collide = function(who) {
 		
 	};
-	blocksList.push(this);
+	staticBlocksList.push(this);
 }
 
 function WORLD(x, y, sx, sy) {
 	this.where = {
 		corner: new Vector(
-			-gameArea.canvas.width/2,
-			-gameArea.canvas.height/2
+			-canvasHolder.clientWidth/2,
+			-canvasHolder.clientHeight/2
 		),
 		change: new Vector(
-			gameArea.canvas.width,
-			gameArea.canvas.height
+			canvasHolder.clientWidth,
+			canvasHolder.clientHeight
 		)
 	};
 	this.size = {   // sorta wierd having two similar objects, but for different purposes. Shouldn't they be instantiated seperately, in to two blocks
@@ -250,7 +251,7 @@ function WORLD(x, y, sx, sy) {
 		invert: document.getElementById("transwallPic"),
 		mario: document.getElementById("transwallPic")
 	};
-	this.collide = function(who) {
+	this.collide = function(who, collVector) {
 		if (who === jimmy) {
 			var potentialWorld = {
 				where: {
@@ -309,7 +310,7 @@ function portal(x, y, dx, dy, n, q) {
 		}
 		
 	};
-	blocksList.push(this);
+	staticBlocksList.push(this);
 }
 
 function transitionwall(x, y, dx, dy, n) {
@@ -330,7 +331,7 @@ function transitionwall(x, y, dx, dy, n) {
 		}
 		
 	};
-	blocksList.push(this);
+	staticBlocksList.push(this);
 }
 
 function dangerblock(x, y, dx, dy) {
@@ -351,7 +352,7 @@ function dangerblock(x, y, dx, dy) {
 		}
 		
 	};
-	blocksList.push(this);
+	staticBlocksList.push(this);
 }
 
 function movingBlock(x, y, dx, dy, f, g) {
@@ -406,10 +407,11 @@ function text(v, x, y, s, f) {
 	this.value = v;
 	this.where = {
 		corner: new Vector(x, y),
-		change: new Vector(gameArea.measureText(v), (s?s:18))
+		change: new Vector(staticArea.measureText(v), (s?s:18))
 	};
 	this.mu = 0;
 	this.bouncieness = 0;
 	this.font = (s?s:18) + "pt " + (f?f:"Trebuchet MS");
 	textList.push(this);
+	drawStatic();
 }

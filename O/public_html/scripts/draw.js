@@ -1,37 +1,37 @@
 // Cartensian-style
-gameArea.translate(canvas.width/2, canvas.height/2);
+gameArea.translate(gameArea.canvas.width/2, gameArea.canvas.height/2);
 gameArea.scale(1, -1);
+
+staticArea.translate(staticArea.canvas.width/2, staticArea.canvas.height/2);
+staticArea.scale(1, -1);
 
 var filterStrength = 20;
 var frameTime = 0, lastLoop = new Date(), thisLoop;
 
-// this function draws the scence to the canvas
+// this function draws the scence to the moving canvas
 function drawScene() {
+	
+	// if this is a new scene
+	//if (time<1) {
+		// then draw on the static canvas too
+		drawStatic();
+	//}
+	
     // clear the canvas
     gameArea.clearRect(world.where.corner.x, world.where.corner.y, world.where.change.x, world.where.change.y);
-    gameArea.scale(1, -1);
-    for (var i=-1; i<2; i++) {
-		for (var j=-2; j<3; j++) {
-			gameArea.drawImage(document.getElementById("backgroundPic"), world.where.corner.x - world.where.corner.x*0.6%1000 + i*world.where.change.x, -world.where.corner.y + world.where.corner.y*0.6%500 + j*world.where.change.y, world.where.change.x, world.where.change.y);
-		}
-    }
-    gameArea.scale(1, -1);
-    // the alternative approach would be just to have the html image element behind the canvas and, canvas transparent
+	
+	
+	// draw blocks
     for (var i=0; i<blocksList.length; i++) {
         var block = blocksList[i];
+		// If you are is the scene...
         if (isCollision(world, block)) {
             gameArea.drawImage(block.image[mode], block.where.corner.x, block.where.corner.y, block.where.change.x, block.where.change.y);
         }
     }
-    for (var k=0; k<textList.length; k++) {
-        var str = textList[k];
-        if (isCollision(world, str)) {
-            gameArea.font = str.font;
-            gameArea.scale(1, -1);
-            gameArea.fillText(str.value, str.where.corner.x, -str.where.corner.y);
-            gameArea.scale(1, -1);
-        }
-    }
+	
+	
+	// draw characters
     for (var j=0; j<charList.length; j++) {
         var elem = charList[j];
         if (isCollision(world, elem)) {
@@ -53,8 +53,49 @@ function drawScene() {
     document.getElementById("canJump").innerHTML = "CanJump=" + jimmy.canJump.x + ", " + jimmy.canJump.y;
 }
 
+// this function draws the scence to the not moving canvas
+function drawStatic() {
+    // clear the canvas
+    staticArea.clearRect(world.where.corner.x, world.where.corner.y, world.where.change.x, world.where.change.y);
+    
+	// draw a new background
+    // the alternative approach would be just to have the html image element behind the canvas and, canvas transparent
+    staticArea.scale(1, -1);
+    for (var i=-1; i<2; i++) {
+		for (var j=-2; j<3; j++) {
+			staticArea.drawImage(document.getElementById("backgroundPic"), world.where.corner.x - world.where.corner.x*0.6%1000 + i*world.where.change.x, -world.where.corner.y + world.where.corner.y*0.6%500 + j*world.where.change.y, world.where.change.x, world.where.change.y);
+		}
+    }
+    staticArea.scale(1, -1);
+	
+	
+	//draw text
+    for (var k=0; k<textList.length; k++) {
+        var str = textList[k];
+        if (isCollision(world, str)) {
+            staticArea.font = str.font;
+            staticArea.scale(1, -1);
+            staticArea.fillText(str.value, str.where.corner.x, -str.where.corner.y);
+            staticArea.scale(1, -1);
+        }
+    }
+	
+	
+	// draw static blocks
+    for (var i=0; i<staticBlocksList.length; i++) {
+        var block = staticBlocksList[i];
+        if (isCollision(world, block)) {
+            staticArea.drawImage(block.image[mode], block.where.corner.x, block.where.corner.y, block.where.change.x, block.where.change.y);
+        }
+    }
+}
+
 function scoochScreen(dx, dy) {
+	if (dx==0 && dy==0) { return; }
+	//alert(dx + ", " +  dy + ";" + (dx==0) + ";" + (dy==0) + ";" + (dx==dy)/*+ arguments.callee.caller.toString()*/);
     world.where.corner.x += dx;
     world.where.corner.y += dy;
     gameArea.translate(-dx, -dy);
+    staticArea.translate(-dx, -dy);
+	drawStatic();
 }

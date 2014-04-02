@@ -1,7 +1,7 @@
 var intervalID;
 
 document.getElementById("flipScreenButton").onclick = function(e) {
-	canvas.className = (canvas.className=="vertFlip")?"":"vertFlip";
+	canvasHolder.className = (canvasHolder.className=="vertFlip")?"":"vertFlip";
 };
 
 document.getElementById("restartLevelButton").onclick = function(e) {

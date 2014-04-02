@@ -129,6 +129,7 @@ function simpliflyCollisionVector(v, specs) {
 }
 
 var reacts = function() {
+	// update the blocks that move
 	for (var i=0; i<blocksList.length; i++) {
         if (blocksList[i].do) {
         
@@ -141,21 +142,34 @@ var reacts = function() {
 			blocksList[i].where.corner.Plus( blocksList[i].velocity );
         }
     }
+	
+	// update characters, because they move
 	for (var i=0; i<charList.length; i++) {
         //Gravity
         charList[i].forceList.push( physics[mode].gravity );
 		
-		var numCollisions = blocksList.length;
-        for (var j=0; j<blocksList.length; j++) {
-            if (isCollision(charList[i], blocksList[j])) {
-                blocksList[j].collide(charList[i], isCollision(charList[i], blocksList[j], "Vector"));
+		
+		var numCollisions = staticBlocksList.length + blocksList.length;
+        for (var j=0; j<staticBlocksList.length + blocksList.length; j++) {
+			
+			// determine the current block
+			var currentBlock;
+			if (j<staticBlocksList.length) {
+				currentBlock = staticBlocksList[j];
+			}
+			else {
+				currentBlock = blocksList[j-staticBlocksList.length];
+			}
+			
+            if (isCollision(charList[i], currentBlock)) {
+                currentBlock.collide(charList[i], isCollision(charList[i], currentBlock, "Vector"));
                 
-                if (blocksList[j] === world) { continue; }
+                if (currentBlock === world) { continue; }
                 
 				// isCollision returns the right amount to stay away from objects
-                //var possibleDX = isCollision(charList[i], blocksList[j], "horizontal") * (blocksList[j] !== world);
-                //var possibleDY = isCollision(charList[i], blocksList[j], "vertical") * (blocksList[j] !== world);
-                var possibleDP = isCollision(charList[i], blocksList[j], "Vector");
+                //var possibleDX = isCollision(charList[i], currentBlock, "horizontal") * (currentBlock !== world);
+                //var possibleDY = isCollision(charList[i], currentBlock, "vertical") * (currentBlock !== world);
+                var possibleDP = isCollision(charList[i], currentBlock, "Vector");
                 var TriangleP = new Vector(0, 0);
                 
                 //Normal Force
@@ -167,7 +181,7 @@ var reacts = function() {
                     console.log("HORIZONTAL COLLISION");
                     charList[i].canJump.x = physics[mode].jumpFrom.x[(possibleDP.x>0)+0];       // the +0 might help cast the result to a number. I don't know if it actually matters, I mean, this is Javascript :J
                                                                                         // Okay, yes it does. ...y[true] = undefined. Also, true+0 = 1, and there were problems when canJump.x is boolean
-                    charList[i].velocity.x*=blocksList[j].bouncieness;     // bump
+                    charList[i].velocity.x*=currentBlock.bouncieness;     // bump
                 }
                 else if ((Math.abs(possibleDP.x) > Math.abs(possibleDP.y) || !possibleDP.x) && possibleDP.y) {     // least drastic change is in y. Not Zeros
                     TriangleP = someOtherProduct(
@@ -176,7 +190,7 @@ var reacts = function() {
                     );
                     console.log("VERTICAL COLLISION");
                     charList[i].canJump.y = physics[mode].jumpFrom.y[(possibleDP.y>0)+0];       // the +0 casts the result to a number
-                    charList[i].velocity.y*=blocksList[j].bouncieness;     // bouncy
+                    charList[i].velocity.y*=currentBlock.bouncieness;     // bouncy
                 }
                 else if (possibleDP.x) {                                  // equal change in x and y. Not Zero. Sorta like diagonal
 					TriangleP = someOtherProduct(
@@ -222,13 +236,13 @@ var reacts = function() {
 					)
 				);*/
                 charList[i].friction.x = Math.min(
-                    Math.abs(TriangleP.y*blocksList[j].mu),   // Actual Friction
+                    Math.abs(TriangleP.y*currentBlock.mu),   // Actual Friction
                     Math.abs(charList[i].velocity.x)
-                )*sign(charList[i].velocity.x)*sign(blocksList[j].mu);
+                )*sign(charList[i].velocity.x)*sign(currentBlock.mu);
                 charList[i].friction.y = Math.min(
-                    Math.abs(TriangleP.x*blocksList[j].mu),   // Actual Friction
+                    Math.abs(TriangleP.x*currentBlock.mu),   // Actual Friction
                     Math.abs(charList[i].velocity.y)
-                )*sign(charList[i].velocity.y)*sign(blocksList[j].mu);
+                )*sign(charList[i].velocity.y)*sign(currentBlock.mu);
                 charList[i].velocity.x += charList[i].friction.x;
                 //charList[i].velocity.y += charList[i].friction.y;
             }
