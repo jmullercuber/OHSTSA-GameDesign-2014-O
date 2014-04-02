@@ -29,7 +29,10 @@
 		<audio src="sounds/The Manifesto.mp3" autoplay loop></audio>
 		
 		<div id="zone" class="noSelect">
-			<canvas id="gameArea" width="1000" height="500"></canvas>
+			<div id="holdCanvases">
+				<canvas id="doesNotMove" width="1000" height="500"></canvas>
+				<canvas id="gameArea" width="1000" height="500"></canvas>
+			</div>
 			<div id="status">
 				<span id="statsHead" class="inlineB">Status</span>
 				<span id="levelStat">Level: 0</span>
