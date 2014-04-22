@@ -21,7 +21,7 @@ function LEVEL_5(currentLevel, currentQuadrant) {
 						this.velocity = scalarMultiply( 8/this.health, subtractVectors(jimmy.position, addVectors( this.where.corner, new Vector(35, 35) )).asUnit() );
 						if (this.health<=0) {
 							//removeFromInventory( findElemWithKey(jimmy.inventory,["name"],"blueKey") );
-							new portal(this.where.corner.x, this.where.corner.y, 70, 70, 6, 1);
+							new portal(this.where.corner.x, this.where.corner.y, 70, 70, 0, 1);
 						}
 					};
 				}

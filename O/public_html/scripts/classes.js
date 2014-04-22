@@ -307,7 +307,7 @@ function portal(x, y, dx, dy, n, q) {
 	this.collide = function(who) {
 		if (who==jimmy)
 		{
-			changeLevel(n?n:currentLevel+1, q?q:1);
+			changeLevel(n!=null?n:currentLevel+1, q?q:1);
 		}
 		
 	};
@@ -329,7 +329,7 @@ function transitionwall(x, y, dx, dy, n) {
 	this.collide = function(who) {
 		if (who==jimmy)
 		{
-			changeLevel(currentLevel, (n?n:currentQuadrant+1));
+			changeLevel(currentLevel, (n!=null?n:currentQuadrant+1));
 		}
 		
 	};
