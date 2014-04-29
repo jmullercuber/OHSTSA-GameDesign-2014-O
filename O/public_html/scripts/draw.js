@@ -12,7 +12,7 @@ var frameTime = 0, lastLoop = new Date(), thisLoop;
 function drawScene() {
 	
 	// if this is a new scene
-	if (time<1) {
+	if (time==0) {
 		// then draw on the static canvas too
 		drawStatic();
 	}
