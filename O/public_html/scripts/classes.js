@@ -36,6 +36,15 @@ function findElemWithKey(array, propList, value) {
 	return -1;
 }
 
+
+// from http://javascriptissexy.com/oop-in-javascript-what-you-need-to-know/
+function inheritPrototype(childObject, parentObject) {
+	var copyOfParent = Object.create(parentObject.prototype);
+	copyOfParent.constructor = childObject;
+	childObject.prototype = copyOfParent;
+}
+
+
 function Vector(x, y) {
 	this.x = x?x:0;
 	this.y = y?y:0;
@@ -203,23 +212,39 @@ function character(xpos, ypos, img1, img2) {
 // Currently, a class for all blocks in the game
 // Properties are where and image
 // Object is then added to the blocksList array
-function wall(x, y, dx, dy) {
+
+function block(x, y, dx, dy) {
 	this.where = {
 		corner: new Vector(x, y),
 		change: new Vector(dx, dy)
 	};
-	this.mu = -0.3;   // I don't think the actual greek letter would be valid
+	this.mu = 0;   // I don't think the actual greek letter would be valid
 	this.bouncieness = 0;
 	this.color = "#666666";
 	this.image = {
 		invert: document.getElementById("blockPic"),
 		mario: document.getElementById("blockPic")
 	};
-	this.collide = function(who) {
-		
-	};
-	staticBlocksList.push(this);
 }
+block.prototype.collide = function (who) {};
+
+
+
+
+function wall(x, y, dx, dy) {
+	block.call(this, x, y, dx, dy);
+	
+	this.mu = -0.3;   // I don't think the actual greek letter would be valid
+	
+	staticBlocksList.push(this);
+	if (time > 0){
+		drawStatic();
+	}
+}
+inheritPrototype(wall, block);
+
+
+
 
 function WORLD(x, y, sx, sy) {
 	this.where = {
@@ -283,95 +308,64 @@ function WORLD(x, y, sx, sy) {
 }
 
 function portal(x, y, dx, dy, n, q) {
-/*	wall.call(this);
-	this.prototype = new wall();
-	this.prototype.constructor = portal;
-	this.collide = function(who) {
-		if (who==jimmy)
-		{
-			currentLevel++;
-			changeLevel();
-		}
-	};*/
+	wall.call(this, x, y, dx, dy);
 	
-	this.where = {
-		corner: new Vector(x, y),
-		change: new Vector(dx, dy)
-	};
 	this.mu = 0;
-	this.bouncieness = 0;
+	this.color = undefined;
 	this.image = {
 		invert: document.getElementById("portalPic"),
 		mario: document.getElementById("portalPic")
 	};
-	this.collide = function(who) {
-		if (who==jimmy)
-		{
-			changeLevel(n!=null?n:currentLevel+1, q?q:1);
-		}
-		
-	};
-	staticBlocksList.push(this);
+	
+	this.nlevel = n;
+	this.nquad = q;
 }
+inheritPrototype(portal, wall);
 
-function transitionwall(x, y, dx, dy, n) {
-	this.where = {
-		corner: new Vector(x, y),
-		change: new Vector(dx, dy)
-	};
-	this.mu = 0;
-	this.bouncieness = 0;
+portal.prototype.collide = function(who) {
+	if (who==jimmy) {
+		changeLevel(this.nlevel!=null?this.nlevel:currentLevel+1, this.nquad?this.nquad:1);
+	}
+};
+
+
+
+
+function transitionwall(x, y, dx, dy, q) {
+	portal.call(this, x, y, dx, dy, currentLevel, (q!=null?q:currentQuadrant+1));
 	this.color = "BLANK";
 	this.image = {
 		invert: document.getElementById("transwallPic"),
 		mario: document.getElementById("transwallPic")
 	};
-	this.collide = function(who) {
-		if (who==jimmy)
-		{
-			changeLevel(currentLevel, (n!=null?n:currentQuadrant+1));
-		}
-		
-	};
-	staticBlocksList.push(this);
 }
+inheritPrototype(transitionwall, portal);
+
+
 
 function dangerblock(x, y, dx, dy) {
-	this.where = {
-		corner: new Vector(x, y),
-		change: new Vector(dx, dy)
-	};
+	wall.call(this, x, y, dx, dy);
+	
 	this.mu = 0;
-	this.bouncieness = 0;
 	this.color = "#660000";
 	this.image = {
 		invert: document.getElementById("dangerblockPic"),
 		mario: document.getElementById("dangerblockPic")
 	};
-	this.collide = function(who) {
-		if (who==jimmy)
-		{
-			jimmy.health-=2;
-		}
-		
-	};
-	staticBlocksList.push(this);
 }
+inheritPrototype(dangerblock, wall);
+
+dangerblock.prototype.collide = function(who) {
+	if (who==jimmy) {
+		jimmy.health-=2;
+	}
+};
 
 function movingBlock(x, y, dx, dy, f, g) {
-	this.where = {
-		corner: new Vector(x, y),
-		change: new Vector(dx, dy)
-	};
+	block.call(this, x, y, dx, dy);
+	
 	this.velocity = new Vector(0, 0);
 	this.acceleration = new Vector(0, 0);
-	this.mu = 0;
-	this.bouncieness = 0;
-	this.color = "#666666";
-	this.image = {
-		invert: document.getElementById("blockPic"),
-		mario: document.getElementById("blockPic")
-	};
 	this.do = f?f:function(t) {};
 	this.collide = g?g:function(who) {
 		if (who)
@@ -382,39 +376,29 @@ function movingBlock(x, y, dx, dy, f, g) {
 	};
 	blocksList.push(this);
 }
+inheritPrototype(movingBlock, block);
 
 function simpleActionBlock(x, y, img, f, g) {
-	this.where = {
-		corner: new Vector(x, y),
-		change: new Vector(img.width, img.height)
-	};
-	this.velocity = new Vector(0, 0);
-	this.acceleration = new Vector(0, 0);
-	this.mu = 0;
-	this.bouncieness = 0;
+	movingBlock.call(this, x, y, img.width, img.height, g, f);
+	
+	this.color = undefined;
 	this.image = {
 		invert: img,
 		mario: img
 	};
-	this.collide = f?f:function(who) {
-		if (who)
-		{
-			who.position.Plus( this.velocity );
-		}
-		
-	};
-	this.do = g?g:function(t) {};
-	blocksList.push(this);
 }
+inheritPrototype(simpleActionBlock, movingBlock);
 
 function text(v, x, y, s, f) {
+	block.call(this, x, y, staticArea.measureText(v), (s?s:18));
+	
 	this.value = v;
-	this.where = {
-		corner: new Vector(x, y),
-		change: new Vector(staticArea.measureText(v), (s?s:18))
-	};
-	this.mu = 0;
-	this.bouncieness = 0;
 	this.font = (s?s:18) + "pt " + (f?f:"Trebuchet MS");
+	
 	textList.push(this);
+	
+	if (time > 0){
+		drawStatic();
+	}
 }
+inheritPrototype(text, block);
