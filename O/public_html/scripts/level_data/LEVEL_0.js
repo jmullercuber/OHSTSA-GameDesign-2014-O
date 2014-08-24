@@ -30,7 +30,7 @@ function LEVEL_0(currentLevel, currentQuadrant) {
 					for (var i=0; i<5; i++) {
 						new text("Level " + (i+1), -345+175*i, -230, 16);
 						var p = new portal(175*i-375, -225, 175, 20, i+1, 1);
-							p.image.mario = p.image.invert = document.getElementById("blockPic");
+							p.image.mario = p.image.invert = imgGather("images/block.png");
 						new wall(175*i-400, -225, 25, 145);
 						new movingBlock(175*i-400, -105, 175, 25,	// up and down
 							function() {this.tme=0; this.do = function(){};},

@@ -157,10 +157,10 @@ function LEVEL_2(currentLevel, currentQuadrant) {
 					new dangerblock(0, world.size.where.corner.y, world.size.where.change.x, 100);// lava on bottom
 					new dangerblock(0, world.size.where.corner.y + world.size.where.change.y-100, world.size.where.change.x, 100);		// mirroring lava on top
 					
-					new simpleActionBlock(470, -30, document.getElementById("spitterPic"), function(){},
+					new simpleActionBlock(470, -30, imgGather("images/Spitter.png"), function(){},
 						function(t) {
 							if (t%50 == 49) {
-								new simpleActionBlock(493, -7, document.getElementById("spitFirePic"),
+								new simpleActionBlock(493, -7, imgGather("images/Spit Fire.png"),
 									function(who) {
 										if (who==jimmy) {
 											jimmy.health-=6;
@@ -177,7 +177,7 @@ function LEVEL_2(currentLevel, currentQuadrant) {
 					
 					new wall(0, -1000, 200, 250);		// first platform
 					new wall(0, world.size.where.corner.y + world.size.where.change.y - 150, 500, 150);		// simmilar platform on top
-					new simpleActionBlock(380, -1000, document.getElementById("lavaSpikePic"),		// Spike!
+					new simpleActionBlock(380, -1000, imgGather("images/Skipe.png"),		// Spike!
 						function(who) {
 							if (who==jimmy) {
 								jimmy.health-=5;
@@ -189,7 +189,7 @@ function LEVEL_2(currentLevel, currentQuadrant) {
 					);
 					new dangerblock(200, world.size.where.corner.y, 400, 200);		// So you can't see spike underlava
 					new wall(600, world.size.where.corner.y, 300, 500);		// Second stepping block
-					new simpleActionBlock(1080, -1000, document.getElementById("lavaSpikePic"),		// Second spike
+					new simpleActionBlock(1080, -1000, imgGather("images/Skipe.png"),		// Second spike
 						function(who) {
 							if (who==jimmy) {
 								jimmy.health-=5;

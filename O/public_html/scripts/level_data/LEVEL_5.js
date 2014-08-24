@@ -9,7 +9,7 @@ function LEVEL_5(currentLevel, currentQuadrant) {
 			new wall(-500, 325, 1000, 50);		// top wall
 			new wall(-500, -375, 1000, 50);// floor
 			
-			new simpleActionBlock(0, 0, document.getElementById("2Boss"),
+			new simpleActionBlock(0, 0, imgGather("images/Mad Boss.png"),
 				function(who) {
 					if (who==jimmy) {
 						jimmy.health-=4;
@@ -27,16 +27,16 @@ function LEVEL_5(currentLevel, currentQuadrant) {
 				}
 			);
 			
-			new simpleActionBlock(0, 0, document.getElementById("blueKey"),		// key
+			new simpleActionBlock(0, 0, imgGather("images/blueKey.png"),		// key
 				function(who) {
 					if (who==jimmy) {
 						//addToInventory( {name:"blueKey", data:this, img:this.image.mario} );
-						blocksList[findElemWithKey(blocksList, ["image", "mario"], document.getElementById("2Boss"))].health--;
+						blocksList[findElemWithKey(blocksList, ["image", "mario"], imgGather("images/Mad Boss.png"))].health--;
 						this.where.corner = new Vector(
 							Math.random()*875 - 450,
 							Math.random()*650 - 325
 						);
-						if (blocksList[findElemWithKey(blocksList, ["image", "mario"], document.getElementById("2Boss"))].health <= 0) {
+						if (blocksList[findElemWithKey(blocksList, ["image", "mario"], imgGather("images/Mad Boss.png"))].health <= 0) {
 							blocksList.splice(blocksList.indexOf(this), 1);
 						}
 					}

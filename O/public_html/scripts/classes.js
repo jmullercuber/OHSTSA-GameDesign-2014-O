@@ -185,7 +185,7 @@ function character(xpos, ypos, img1, img2) {
 	this.mu = -0.3;
 	this.bouncieness = 0;
 	this.image = img1;
-	this.jumpImage = img2?img2:img1;
+	this.jumpImage = img2 || img1;
 	this.canJump = {
 		x:false,
 		y:false
@@ -222,8 +222,8 @@ function block(x, y, dx, dy) {
 	this.bouncieness = 0;
 	this.color = "#666666";
 	this.image = {
-		invert: document.getElementById("blockPic"),
-		mario: document.getElementById("blockPic")
+		invert: imgGather("images/block.png"),
+		mario: imgGather("images/block.png")
 	};
 }
 block.prototype.collide = function (who) {};
@@ -274,8 +274,8 @@ function WORLD(x, y, sx, sy) {
 	this.mu = 0;
 	this.bouncieness = 0;
 	this.image = {
-		invert: document.getElementById("transwallPic"),
-		mario: document.getElementById("transwallPic")
+		invert: imgGather("images/transitionwall.png"),
+		mario: imgGather("images/transitionwall.png")
 	};
 	this.collide = function(who, collVector) {
 		if (who === jimmy) {
@@ -313,8 +313,8 @@ function portal(x, y, dx, dy, n, q) {
 	this.mu = 0;
 	this.color = undefined;
 	this.image = {
-		invert: document.getElementById("portalPic"),
-		mario: document.getElementById("portalPic")
+		invert: imgGather("images/portal.png"),
+		mario: imgGather("images/portal.png")
 	};
 	
 	this.nlevel = n;
@@ -335,8 +335,8 @@ function transitionwall(x, y, dx, dy, q) {
 	portal.call(this, x, y, dx, dy, currentLevel, (q!=null?q:currentQuadrant+1));
 	this.color = "BLANK";
 	this.image = {
-		invert: document.getElementById("transwallPic"),
-		mario: document.getElementById("transwallPic")
+		invert: imgGather("images/transitionwall.png"),
+		mario: imgGather("images/transitionwall.png")
 	};
 }
 inheritPrototype(transitionwall, portal);
@@ -349,8 +349,8 @@ function dangerblock(x, y, dx, dy) {
 	this.mu = 0;
 	this.color = "#660000";
 	this.image = {
-		invert: document.getElementById("dangerblockPic"),
-		mario: document.getElementById("dangerblockPic")
+		invert: imgGather("images/dangerblock.png"),
+		mario: imgGather("images/dangerblock.png")
 	};
 }
 inheritPrototype(dangerblock, wall);
