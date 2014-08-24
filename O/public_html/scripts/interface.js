@@ -47,7 +47,7 @@ function drawUserInterface() {
 
 function addToInventory(item) {
 	jimmy.inventory.push(item);
-	var newPic = Image();
+	var newPic = new Image();
 		newPic.src = item.img.src;
 	document.getElementById("inventory").getContext("2d").drawImage(newPic, 15*jimmy.inventory.length, 20, 10, 40);
 }
