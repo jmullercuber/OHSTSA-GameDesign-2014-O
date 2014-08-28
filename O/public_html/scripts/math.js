@@ -46,15 +46,15 @@ var isCollision = function(obj1, obj2, typeTo) {
 			!(wheres[0].corner.y > wheres[1].corner.y+wheres[1].change.y ||
 			wheres[1].corner.y > wheres[0].corner.y+wheres[0].change.y)) {   // if it actually collides in the y direction
 				if (wheres[0].corner.y+wheres[0].change.y/2 > wheres[1].corner.y+wheres[1].change.y/2) {   // obj1 should be above obj2		   // is the < and > confusing? sorry!, its because of converting from canvas to cartesian styles
-					console.log("Collided from Character's Bottom");
+					//console.log("Collided from Character's Bottom");
 					return (wheres[1].corner.y+wheres[1].change.y - wheres[0].corner.y + 1);	// +1 for safety
 				}
 				else if (wheres[0].corner.y+wheres[0].change.y/2 < wheres[1].corner.y+wheres[1].change.y/2) {   // obj1 should be beneath obj2; Wall's COM is most positive to you
-					console.log("Collided from Character's Top");
+					//console.log("Collided from Character's Top");
 					return -(wheres[0].corner.y+wheres[0].change.y - wheres[1].corner.y + 1);   // +1 for safety
 				}
 				else {
-					console.log("Collision at Y-Axis Center Of Mass");
+					//console.log("Collision at Y-Axis Center Of Mass");
 					return 0;   // needs work
 					// Work taken care of at reacts(). Pretty sure it works.
 					// Probably fails when objects overlap, and centers are the same 
@@ -69,15 +69,15 @@ var isCollision = function(obj1, obj2, typeTo) {
 			!(wheres[0].corner.x > wheres[1].corner.x+wheres[1].change.x ||
 			wheres[1].corner.x > wheres[0].corner.x+wheres[0].change.x)) {   // if it actually collides in the x direction
 				if (wheres[0].corner.x+wheres[0].change.x/2 > wheres[1].corner.x+wheres[1].change.x/2) {   // obj1 should be right of obj2
-					console.log("Collided from Character's Left");
+					//console.log("Collided from Character's Left");
 					return (wheres[1].corner.x+wheres[1].change.x - wheres[0].corner.x + 1);	// +1 for safety
 				}
 				else if (wheres[0].corner.x+wheres[0].change.x/2 < wheres[1].corner.x+wheres[1].change.x/2) {   // obj1 should be left of obj2
-					console.log("Collided from Character's Right");
+					//console.log("Collided from Character's Right");
 					return -(wheres[0].corner.x+wheres[0].change.x - wheres[1].corner.x + 1);   // +1 for safety
 				}
 				else {
-					console.log("Collision at X-Axis Center Of Mass");
+					//console.log("Collision at X-Axis Center Of Mass");
 					return 0;
 				}
 			}
@@ -178,7 +178,7 @@ var reacts = function() {
 						possibleDP,
 						new Vector(1, 0)
 					);
-					console.log("HORIZONTAL COLLISION");
+					//console.log("HORIZONTAL COLLISION");
 					charList[i].canJump.x = physics[mode].jumpFrom.x[(possibleDP.x>0)+0];	   // the +0 might help cast the result to a number. I don't know if it actually matters, I mean, this is Javascript :J
 																						// Okay, yes it does. ...y[true] = undefined. Also, true+0 = 1, and there were problems when canJump.x is boolean
 					charList[i].velocity.x*=currentBlock.bouncieness;	 // bump
@@ -188,7 +188,7 @@ var reacts = function() {
 						possibleDP,
 						new Vector(0, 1)
 					);
-					console.log("VERTICAL COLLISION");
+					//console.log("VERTICAL COLLISION");
 					charList[i].canJump.y = physics[mode].jumpFrom.y[(possibleDP.y>0)+0];	   // the +0 casts the result to a number
 					charList[i].velocity.y*=currentBlock.bouncieness;	 // bouncy
 				}
@@ -197,7 +197,7 @@ var reacts = function() {
 						possibleDP,
 						new Vector(1, 1)
 					);
-					console.log("DIAGONAL COLLISION");
+					//console.log("DIAGONAL COLLISION");
 				}
 				/*
 				charList[i].velocity = someOtherProduct(
