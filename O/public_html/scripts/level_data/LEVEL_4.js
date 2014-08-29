@@ -55,7 +55,7 @@ function LEVEL_4(currentLevel, currentQuadrant) {
 					new wall(1300, 65, 600, 25);		// top wall holding key
 					new wall(1300, -85, 25, 150);		// left wall holding key
 					new wall(1300, -110, 100, 25);		// lower-left wall holding key
-					new simpleActionBlock(1800, -50, document.getElementById("blueKey"),		// key
+					new simpleActionBlock(1800, -50, imgGather("images/blueKey.png"),		// key
 						function(who) {
 							if (who==jimmy) {
 								addToInventory( {name:"blueKey", data:this, img:this.image.mario} );
@@ -65,12 +65,12 @@ function LEVEL_4(currentLevel, currentQuadrant) {
 					);
 					new wall(200, -250, 1000, 200);		// big floor resumes
 					
-					new simpleActionBlock(1000, -50, document.getElementById("blueButtonUp"),		// button
+					new simpleActionBlock(1000, -50, imgGather("images/blueButton_up.png"),		// button
 						function(who, colsVector) {
 							if (who==jimmy) {
-								if (findElemWithKey(jimmy.inventory,["name"],"blueKey") > -1 && simpliflyCollisionVector(colsVector)=="Do y" && this.image.mario!=document.getElementById("blueButtonDown")) {
+								if (findElemWithKey(jimmy.inventory,["name"],"blueKey") > -1 && simpliflyCollisionVector(colsVector)=="Do y" && this.image.mario!=imgGather("images/blueButton_down.png")) {
 									removeFromInventory( findElemWithKey(jimmy.inventory,["name"],"blueKey") );
-									this.image.invert = this.image.mario = document.getElementById("blueButtonDown");
+									this.image.invert = this.image.mario = imgGather("images/blueButton_down.png");
 									this.where.change.y = this.image.mario.height;
 									new transitionwall(25, 450, 200, 20, 2);
 									new movingBlock(25, 250, 175, 20, function(){},
@@ -102,7 +102,7 @@ function LEVEL_4(currentLevel, currentQuadrant) {
 									this.where.corner = maxOfVectors( minOfVectors(this.where.corner, (new Vector(900, 400))), new Vector(200, -50) );
 									if (this.where.corner.x == 900 || this.where.corner.x == 200) {this.velocity.x*=-0.8}
 									if (this.where.corner.y == 400 || this.where.corner.y == -50) {this.velocity.y*=-0.8}
-									if (findElemWithKey( blocksList, ["image", "mario", "id"], "blueButtonDown" ) > -1 ){
+									if (findElemWithKey( blocksList, ["image", "mario"], imgGather("images/blueButton_down.png") ) > -1 ){
 										this.do = function() {
 											this.acceleration = new Vector(0, 0);
 											this.velocity = subtractVectors((new Vector(this.toX, this.toY)), this.where.corner).asUnit();
@@ -146,69 +146,33 @@ function LEVEL_4(currentLevel, currentQuadrant) {
 							})(i)
 						);
 					}
-					for (var j=0; j<3; j++) {
-						for (var i=0; i<4; i++) {
-							if (i%2 === 0) {
-								new movingBlock(230+75*Math.cos(i*Math.PI/2), 2000-j*500+75*Math.sin(i*Math.PI/2), 40, 20,
-									function() {
-										this.image.invert = this.image.mario = document.getElementById("dangerblockPic");
-										this.do =
-											(function(ii){
-												return function(t) {
-													this.velocity = new Vector(-Math.sin(t/100+ii*Math.PI/2), Math.cos(t/100+ii*Math.PI/2));
-												};
-											})(i);
-									}
-								);
-							}
-							else {
-								new movingBlock(230+75*Math.cos(i*Math.PI/2), 2000-j*500+75*Math.sin(i*Math.PI/2), 40, 20,
-									(function(ii){
-										return function(t) {
-											this.velocity = new Vector(-Math.sin(t/100+ii*Math.PI/2), Math.cos(t/100+ii*Math.PI/2));
-										};
-									})(i),
-									function(who) {
-										if (who==jimmy)
-										{
-											jimmy.health-=2;
-										}
-		
-									}
-								);
-							}
-						}
-					}
-					for (var j=0; j<3; j++) {
-						for (var i=0; i<4; i++) {
-							if (i%2 === 0) {
-								new movingBlock(530+75*Math.cos(i*Math.PI/2), 2000-j*500+75*Math.sin(i*Math.PI/2), 40, 20,
-									function() {
-										this.image.invert = this.image.mario = document.getElementById("dangerblockPic");
-										this.do =
-											(function(ii){
-												return function(t) {
-													this.velocity = new Vector(-Math.sin(t/100+ii*Math.PI/2), Math.cos(t/100+ii*Math.PI/2));
-												};
-											})(i);
-									},
-									function(who) {
-										if (who==jimmy)
-										{
-											jimmy.health-=2;
-										}
-		
-									}
-								);
-							}
-							else {
-								new movingBlock(530+75*Math.cos(i*Math.PI/2), 2000-j*500+75*Math.sin(i*Math.PI/2), 40, 20,
+					for (var k=0; k<2; k++) {
+						for (var j=0; j<3; j++) {
+							for (var i=0; i<4; i++) {
+								var twirlblock = new movingBlock(263+(k==0?0:500)+75*Math.cos(i*Math.PI/2), 2000-j*500+75*Math.sin(i*Math.PI/2), 40, 20,
 									(function(ii){
 										return function(t) {
 											this.velocity = new Vector(-Math.sin(t/100+ii*Math.PI/2), Math.cos(t/100+ii*Math.PI/2));
 										};
 									})(i)
 								);
+								if (i%2 == 0) {
+									twirlblock.do = (function(ii){
+										return function() {
+											this.color = "#660000";
+											this.image.invert = this.image.mario = imgGather("images/dangerblock.png");
+											this.do = function(t) {
+												this.velocity = new Vector(-Math.sin(t/100+ii*Math.PI/2), Math.cos(t/100+ii*Math.PI/2));
+											}
+										};
+									})(i);
+									twirlblock.collide = function(who) {
+										if (who==jimmy)
+										{
+											jimmy.health-=2;
+										}
+									}
+								}
 							}
 						}
 					}

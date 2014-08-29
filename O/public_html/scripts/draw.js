@@ -75,7 +75,7 @@ function drawStatic() {
 	staticArea.scale(1, -1);
 	for (var i=-1; i<2; i++) {
 		for (var j=-2; j<3; j++) {
-			staticArea.drawImage(document.getElementById("backgroundPic"), world.where.corner.x - world.where.corner.x*0.6%1000 + i*world.where.change.x, -world.where.corner.y + world.where.corner.y*0.6%500 + j*world.where.change.y, world.where.change.x, world.where.change.y);
+			staticArea.drawImage(imgGather("images/background.png"), world.where.corner.x - world.where.corner.x*0.6%1000 + i*world.where.change.x, -world.where.corner.y + world.where.corner.y*0.6%500 + j*world.where.change.y, world.where.change.x, world.where.change.y);
 		}
 	}
 	staticArea.scale(1, -1);
