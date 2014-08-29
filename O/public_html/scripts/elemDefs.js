@@ -22,16 +22,28 @@ var imgGather = function(src) {
 };
 
 // Preload Here
-imgGather("images/background.png");
-imgGather("images/block.png");
-imgGather("images/transitionwall.png");
-imgGather("images/dangerblock.png");
-imgGather("images/portal.png");
-imgGather("images/Spike.png");
-imgGather("images/Spitter.png");
-imgGather("images/Spit Fire.png");
-imgGather("images/Spring.png");
-imgGather("images/blueKey.png");
-imgGather("images/blueButton_up.png");
-imgGather("images/blueButton_down.png");
-imgGather("images/Mad Boss.png");
+var imgPaths = [
+	"images/background.png",
+	"images/block.png",
+	"images/transitionwall.png",
+	"images/dangerblock.png",
+	"images/portal.png",
+	"images/Spike.png",
+	"images/Spitter.png",
+	"images/Spit Fire.png",
+	"images/Spring.png",
+	"images/blueKey.png",
+	"images/blueButton_up.png",
+	"images/blueButton_down.png",
+	"images/Mad Boss.png"
+];
+
+// Thanks Emmett and Jonathan Fingland @ stackoverflow
+function preload(sources)
+{
+  for (i=0; i < sources.length; ++i) {
+    imgDictionary[sources[i]] = new Image();
+    imgDictionary[sources[i]].src = sources[i];
+  }
+}
+preload(imgPaths);
