@@ -44,6 +44,11 @@ h1 {
 	text-align: center;
 }
 
+#closeIntroBox {
+	display: inline;
+	cursor: pointer;
+}
+
 .button {
 	display: block;
 	width: 100px;
@@ -223,13 +228,11 @@ span {
 #inventoryHead {
 	display: inline-block;
 	position: relative;
-	top: -17.5px;
-	
 	height: 20px;
 	width: 75px;
 	margin-right: 20px;
 	margin-top: 10px;
-	border: 2px solid #111111;
+	/*border: 2px solid #111111;*/
 	border-radius: 3px;
 	padding: 3px;
 	background: #aaaaaa;

@@ -5,6 +5,11 @@ document.getElementById("showDebug").onclick = function() {
 	window.scrollTo(0, 500);
 };
 
+// Make the notification more responsive
+document.getElementById("closeIntroBox").onclick = function(){
+	document.getElementById("intro").parentElement.removeChild(document.getElementById("intro"))
+};
+
 document.onmousemove = function(e) {
 		var rect = canvasHolder.getBoundingClientRect();
 		var mouseCoor = {
